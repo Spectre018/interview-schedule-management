@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Job</title>
+    <style>
+      *{
+        margin: 0%;
+        padding: 0%;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-image: linear-gradient(90deg,#780206,#061161);
+    }
+    .container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+      }
+      h1 {
+        margin-bottom: 10px;
+        margin-top: 20px;
+        color: #fff;
+        font-weight: 500;
+      }
+      /* Full-width input fields */
+      input[type="text"],
+      input[type="number"],
+      input[type="date"] {
+        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .button {
+        background-image: linear-gradient(-45deg,#780206,#061161);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        font-size: large;
+      }
+      .button:hover {
+        background-image: linear-gradient(45deg,#780206,#061161);
+        opacity: 0.8;
+      }
+      .imgcontainer {
+        text-align: center;
+        margin: 0;
+      }
+      img.logo {
+        width: auto;
+        outline: none;
+        padding-top: 50px;
+        filter: brightness(200%);
+      }
+      .container {
+        padding: 0px;
+        color: white;
+      }
+      hr{
+        padding: 5px;
+        border: none;
+      }
+   </style>
+</head>
+<body>
+<form
+        th:action="@{/hr/saveJob}"
+        onsubmit="alert('Job added successfully')"
+        th:object="${hrAddedJob}"
+        method="post"
+>
+    <div class="container">
+        <h1>Add Job</h1>
+        <p>Please fill in this form to create job</p>
+        <hr>
+        <label for="hrId"><b>HR Id</b></label>
+        <input type="number" id="hrId" placeholder="Enter HR Id" name="hrId" minlength="3" maxlength="3" required th:field="*{hrId}"/>
+        <hr>
+        <label for="domain"><b>Domain</b></label>
+        <input type="text" id="domain" name="domain" placeholder="Enter Job Domain" required th:field="*{domain}"/>
+        <hr>
+        <label for="reqVacancy"><b>Required Vacancies</b></label>
+        <input type="number" id="vacancy" name="vacancy" min="1" placeholder="Enter Required Vacancies" required th:field="*{vacancy}"/>
+        <hr />
+        <label for="lastdate"><b>Closing Date</b></label>
+        <input type="date" id="lastDate" name="lastDate" required th:field="*{closingDate}" />
+        <hr>
+        <label><b>Priority</b></label>
+        <input type="radio" name="priority" value="High   " id="High" required th:field="*{priority}">High
+        <input type="radio" name="priority" id="Medium" value="Medium" required th:field="*{priority}">Medium
+        <input type="radio" name="priority" id="Low" required value="Low" th:field="*{priority}">Low <br>
+        <hr>
+        <label><b>Minimum Experience</b></label>
+        <input type="number" name="minimumExperience" id="minimumExperience" min="1" placeholder="Enter Minimum Experience" required th:field="*{minimumExperience}">
+        <hr>
+        <input type="submit" value="Submit" class="button" />
+    </div>
+</form>
+<script>
+        var minDate=new Date().toISOString().split('T')[0];
+        document.getElementById("lastDate").setAttribute("min", minDate);
+    </script>
+</body>
+</html>

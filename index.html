@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Scheduling Management</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-image: linear-gradient(90deg,#780206,#061161);
+            height: 100%;
+        }
+        header{
+            height: 80px;
+            width: auto;
+            background-image: linear-gradient(90deg,#780206,#061161);
+            background-size: cover;
+            background-position: center;
+            top: 0;
+        }
+        .navbar{
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content:space-evenly;
+        }
+        .navbar ul li{
+            list-style: none;
+            display: inline-block;
+            margin: 0 15px;
+            font-size: large;
+            position: relative;
+        }
+        a{
+            text-decoration: none;
+            color: #fff;
+            padding: 25px 25px;
+        }
+        a:hover{
+          color: #d1a2a2;
+        }
+        
+        .navbar ul li::after{
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #009688;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+        .navbar ul li:hover::after{
+            width: 100%;
+        }
+        .navbar li{
+            list-style: none;
+        }
+        footer{
+            color: #fff;
+            font-weight: 100;
+            text-align: center;
+            font-size: medium;
+            position: sticky;
+        }
+        .heading{
+            color: white;
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 50px;
+        }
+        .column{
+            width: 50%;
+            float: left;
+            display: block;
+            text-align: center;
+            padding: 80px ;
+            color: white;
+            height: 300px;
+        }
+        #vision,  #hr, #sponsor{
+            display: flex;
+            background-image: linear-gradient(-90deg,#780206,#061161);
+        }
+        #candidate,#admin,#contact{
+            display: flex;
+            background-image: linear-gradient(90deg,#780206,#061161);
+        }
+input[type=text],input[type=email], textarea {
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+input[type=submit] {
+    background-image: linear-gradient(180deg,#780206,#061161);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+    background-image: linear-gradient(0deg,#780206,#061161);
+}
+
+.container {
+    width: 100%;
+  border-radius: 5px;
+  padding-top: 0px;
+  text-align: left;
+  padding-bottom: 60px;
+}
+@keyframes animate {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+.blink{
+    animation: animate 1s linear infinite;
+}
+p{
+    text-align:center;
+}
+    </style>
+</head>
+
+    <header>
+        <div class="navbar">
+            <img src="https://i.ibb.co/71T36T2/logo3.png" width="180px">
+            <ul>
+                <li><a href="#vision">Our Vision</a></li>
+                <li><a href="#candidate">Candidate</a></li>
+                <li><a href="#hr">HR</a></li>
+                <li><a href="#admin">Admin</a></li>
+                <li><a href="#sponsor">Sponsor/Organiser/Coach</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <body>
+    <div class="heading">
+        <p>Welcome to Interview Scheduling Management</p>
+        <br>
+        <a href="/applyJobsOnRegistration"><p class="blink">Click here to apply for new jobs.</p></a>
+    </div>
+    <div id="vision">
+        <div class="column" >
+            <h2>Our Vision</h2>
+        </div>
+        <div class="column">
+            <h2><i>"Create economic opportunity for every candidate by connecting global HRs."</i></h2>
+        </div>
+    </div>
+    <div id="candidate">
+        <div class="column">
+            <h2>Candidate</h2>
+            <br>
+            <p>If you're an user searching for jobs, want to apply for job openings, then you can proceed with candidate registration/login. </p>
+        </div>
+        <div class="column">
+            <p>If you're new to this website, Click on register to create an account.</p>
+            <a href="/register"><h2>Register</h2></a>
+            <br><br>
+            <p>Already have an account?</p>
+            <a href="/candidate/home"><h2>Login</h2></a>
+        </div>
+    </div>
+    <div id="hr">
+        <div class="column">
+            <h2>HR</h2>
+            <br>
+            <p>If you're an user looking for candidates who are suitable for your job openings, then you can proceed with HR registration/login.</p>
+        </div>
+        <div class="column">
+            <p>If you're new to this website, Click on register to create an account.</p>
+            <a href="/register"><h2>Register</h2></a>
+            <br><br>
+            <p>Already have an account?</p>
+            <a href="/hr/home"><h2>Login</h2></a>
+        </div>
+    </div>
+    <div id="admin">
+        <div class="column">
+            <h2>Admin</h2>
+            <br>
+            <p>Not accessible by outside users. Internal only.</p>
+        </div>
+        <div class="column">
+            <a href="/admin/home"><h2>Login</h2></a>
+        </div>
+    </div>
+    <div id="sponsor">
+        <div class="column">
+            <h2>Sponsor/Organiser/Coach</h2>
+        </div>
+        <div class="column">
+            <p>If you're new to this website, Click on register to create an account</p>
+            <a href="#"><h2>Register</h2></a>
+            <br><br>
+            <p>Already have an account?</p>
+            <a href="#"><h2>Login</h2></a>
+        </div>
+    </div>
+    <div id="contact us">
+        <div class="column">
+            <h2>Contact us</h2>
+            <br>
+            <p>We would love to hear from you, please drop us a line if you have any query.</p>
+        </div>
+        <div class="column">
+                <table class="container">
+                    <tr>
+                        <td><label for="fname">First Name</label></td>
+                        <td><input type="text" id="fname" name="firstname" placeholder="Your name.."></td>
+                    </tr>
+                    <tr>
+                        <td><label for="lname">Last Name</label></td>
+                        <td><input type="text" id="lname" name="lastname" placeholder="Your last name.."></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="email" id="email" name="email" placeholder="Your Email.."></td>
+                    </tr>
+                    <tr>
+                        <td><label for="message">Message</label></td>
+                        <td><textarea id="message" name="message" placeholder="Your message.." rows="3" cols="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Submit"></td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+</body>
+<footer>
+    <p>&copy; Copyright 2021. All Rights Reserved.</p> 
+    <p>Interview Scheduling Management by Cognizant</p>
+</footer>
+</html>

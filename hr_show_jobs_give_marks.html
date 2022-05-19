@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobs</title>
+    <style>
+        *{
+        margin: 0%;
+        padding: 0%;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-image: linear-gradient(90deg,#780206,#061161);
+    }
+    table{
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 150px;
+        }
+    table, td, th{
+            border: 1px solid rgb(250, 249, 249);
+            text-align: center;
+            padding:15px;
+            color: #fff;
+        }
+        .container{
+            padding-top: 100px;
+            color: white;
+            text-align: center;
+        }
+        .header{
+            width: 100%;
+            height: 200px;
+            padding-bottom: 30px;
+            background-image: linear-gradient(90deg,#780206,#061161);
+            background-size: cover;
+            background-position: center;
+        }
+        .navbar{
+            width: 90%;
+            margin: auto;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content:space-evenly;
+        }
+        .navbar ul li{
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+            font-size: large;
+            position: relative;
+        }
+
+        a{
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .navbar ul li::after{
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #009688;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+        .navbar ul li:hover::after{
+            width: 100%;
+        }
+        .navbar li{
+            list-style: none;
+        }
+        #logout {
+        background-color: #780206;
+        border-radius: 28px;
+        text-decoration: none;
+        color: #ffffff;
+        padding: 10px 30px;
+        display: inline-block;
+        margin: 20px;
+        font-size: 24px;
+        transition: none;
+        }
+        #logout:hover{
+            background-color: #772528;
+        }
+        footer{
+            color: #fff;
+            font-weight: 100;
+            text-align: center;
+            font-size: medium;
+            padding-top: 30px;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="navbar">
+                <img src="https://i.ibb.co/71T36T2/logo3.png" class="logo" width="180px">
+                <ul>
+                    <li><a href="/hr/home">Home</a></li>
+                    <li><a th:href="@{/hr/showJobAddForm}">Add Job</a></li>
+                    <li><a href="/hr/viewAppliedCandidates">Applied Candidates</a></li>
+                    <li><a th:href="@{/hr/giveMarksPage}">Give Marks</a></li>
+                    <li><a th:href="@{/hr/feedback}">Feedback</a></li>
+                </ul>
+                <li><a href="/logout" id="logout">Logout</a></li>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Provide marks</h2>
+        <br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Requirement Id</th>
+                    <th>Job Id</th>
+                    <th>Candidate Id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="job : ${joblist}" th:if="${job.hrId}==${currentHrId}">
+                    <td th:text="${job.id}"></td>
+                    <td th:text="${job.hrId}"></td>
+                    <td th:text="${job.candidateId}"></td>
+                    <td th:if="${job.isMarksAwarded}==false"><a th:href="@{/hr/giveMarksForm/{id}(id=${job.id})}">PROVIDE MARKS</a></td>
+                    <td th:if="${job.isMarksAwarded}==true">MARKS AWARDED</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; Copyright 2021. All Rights Reserved.</p>
+        <br>
+        <p>Interview Scheduling Management by Cognizant</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+    <style>
+    *{
+        margin: 0%;
+        padding: 0%;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-image: linear-gradient(90deg,#780206,#061161);
+    }
+    .container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        padding: 0px;
+        color: white;
+      }
+      h1 {
+        margin-bottom: 10px;
+        margin-top: 20px;
+        color: #fff;
+        font-weight: 500;
+      }
+      /* Full-width input fields */
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      input[type="password"],
+      input[type="email"],
+      input[type="tel"]{
+        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .button {
+        background-image: linear-gradient(-45deg,#780206,#061161);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        font-size: large;
+      }
+      .button:hover {
+        background-image: linear-gradient(45deg,#780206,#061161);
+        opacity: 0.8;
+      }
+      .imgcontainer {
+        text-align: center;
+        margin: 0;
+      }
+      img.logo {
+        width: auto;
+        outline: none;
+        padding-top: 50px;
+        filter: brightness(200%);
+      }
+      hr{
+        padding: 5px;
+        border: none;
+      }
+    </style>
+
+
+</head>
+<body>
+<form name="form"
+      action="#"
+      th:action="@{/submitRegistration}"
+      th:object="${user}"
+      onsubmit="return FormValidation()" method="POST" aria-required="true">
+    <div class="container">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr />
+        <label><b>Registering as? *</b></label>
+        <input
+                type="radio"
+                id="hr"
+                name="user"
+                value="HR"
+                th:field="*{role}"
+                required
+        />
+        <label>HR</label>
+        <input type="radio" id="candidate" name="user" value="Candidate" th:field="*{role}" required />
+        <label>Candidate</label>
+        <hr />
+        <label for="firstName"><b>First Name *</b></label>
+        <input
+                type="text"
+                id="firstName"
+                placeholder="Enter First Name"
+                name="firstName"
+                minlength="4"
+                maxlength="50"
+                th:field="*{firstName}"
+
+        />
+        <br />
+        <label for="lastName"><b>Last Name *</b></label>
+        <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Enter Last Name"
+                th:field="*{lastName}"
+        />
+        <br />
+        <label for="dob"><b>Date of birth </b></label>
+        <input type="date" id="dob" name="dob"
+               placeholder="Enter DOB"
+               th:field="*{dateOfBirth}"/>
+        <hr />
+        <label for="gender"><b>Gender *</b></label>
+        <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="Male"
+                th:field="*{gender}"
+        />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female" th:field="*{gender}"/>
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="Other" th:field="*{gender}"/>
+        <label for="other">Other</label>
+        <hr />
+        <label for="contact"><b>Contact number *</b></label>
+        <input
+                type="tel"
+                id="contact"
+                placeholder="Enter Contact number"
+                name="contact"
+                pattern="[6789][0-9]{9}"
+                title="Contact should be in 10 digits"
+                th:field="*{contactNum}";
+        />
+        <br />
+        <label for="email"><b>Email *</b></label>
+        <input
+                type="email"
+                placeholder="Enter Email"
+                name="email"
+                id="email"
+                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                title="Example: abc@gmail.com"
+                th:field="*{email}"
+        />
+        <br />
+        <label for="psw"><b>Password *</b></label>
+        <input
+                type="password"
+                placeholder="Enter Password"
+                name="psw"
+                id="psw"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+                th:field="*{password}"
+        />
+        <p>
+            By creating an account you agree to our
+            <a href="#">Terms & Privacy</a>.
+        </p>
+        <input type="submit" value="Register" class="button" />
+    </div>
+</form>
+<script>
+
+
+
+      function FormValidation(){
+        var a= document.forms["form"]["firstName"].value;
+        var b= document.forms["form"]["lastName"].value;
+        var c= document.forms["form"]["dob"].value;
+        var e= document.forms["form"]["contact"].value;
+        var f= document.forms["form"]["email"].value;
+        var g= document.forms["form"]["psw"].value;
+
+        if(a==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('firstName').style.borderColor="red";
+          return false;
+        }else if(b==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('lastName').style.borderColor="red";
+          return false;
+        }else if(c==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('dob').style.borderColor="red";
+          return false;
+        }else if(e==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('contact').style.borderColor="red";
+          return false;
+        }else if(f==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('email').style.borderColor="red";
+          return false;
+        }else if(g==""){
+          alert("please update the highlighted mandatory * field(s)");
+          document.getElementById('psw').style.borderColor="red";
+          return false;
+        }
+        const oneYear = 24 * 60 * 60 * 1000 * 365; // hours*minutes*seconds*milliseconds
+const firstDate = new Date(document.getElementById("dob").value);
+const secondDate = new Date();
+const diffYears = Math.round(Math.abs((firstDate - secondDate) / oneYear));
+if(diffYears < 18)
+{
+    alert('Your age is ' + diffYears + ' years, you are not eligible to apply');
+    document.getElementById('dob').style.borderColor="red";
+       return false;
+       }
+  }
+
+    </script>
+</body>
+</html>

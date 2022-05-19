@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interviews</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-image: linear-gradient(90deg,#780206,#061161);
+        }
+        .header{
+            width: 100%;
+            height: 200px;
+            padding-bottom: 30px;
+            background-image: linear-gradient(90deg,#780206,#061161);
+            background-size: cover;
+            background-position: center;
+        }
+        .navbar{
+            width: 90%;
+            margin: auto;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content:space-evenly;
+        }
+        .navbar ul li{
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+            font-size: large;
+            position: relative;
+        }
+        
+        a{
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .navbar ul li::after{
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #009688;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+        .navbar ul li:hover::after{
+            width: 100%;
+        }
+        .navbar li{
+            list-style: none;
+        }
+        #logout {
+        background-color: #780206;
+        border-radius: 28px;
+        text-decoration: none;
+        color: #ffffff;
+        padding: 10px 30px;
+        display: inline-block;
+        margin: 20px;
+        font-size: 24px;
+        transition: none;
+        }
+        #logout:hover{
+            background-color: #772528;
+        }
+        footer{
+            color: #fff;
+            font-weight: 100;
+            text-align: center;
+            font-size: medium;
+        }
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 150px;
+        }
+        table, td, th{
+            border: 1px solid rgb(250, 249, 249);
+            text-align: center;
+            padding:15px;
+            color: #fff;
+        }
+        .heading{
+            color: #fff;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        .container{
+            color: white;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="header">
+        <div class="navbar">
+            <img src="https://i.ibb.co/71T36T2/logo3.png" class="logo" width="180px">
+            <ul>
+                <li><a href="/admin/home">Home</a></li>
+                <li><a href="/admin/notifyJobs">Notify Jobs</a></li>
+                <li><a href="/admin/scheduleInterview">Schedule Interview</a></li>
+                <li><a href="/admin/feedback">Send Feedback form</a></li>
+            </ul>
+            <li><a href="/logout" id="logout">Logout</a></li>
+        </div>
+    </div>
+    </header>
+    <div style="width:800px; margin:0 auto;">
+        <table  border="5px solid black" cellpadding="15">
+            <thead>
+                <tr>
+                    <td>Job Id</td>
+                    <td>Candidate Id</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="job : ${joblist}" th:if="${job.isShortlisted == true}">
+                    <td th:text="${job.jobId}"></td>
+                    <td th:text="${job.candidateId}"></td>
+<!--                    <td th:if="${job.isShortlisted == false}"><a th:href="@{/admin/schedule/{id}(id=${job.id})}">Schedule the interview</a></td>-->
+<!--                    <td th:if="${job.isShortlisted == true}">Scheduled</td>-->
+                    <td th:if="${job.isScheduled== false}"><a th:href="@{/admin/schedule/{id}(id=${job.id})}">Schedule interview</a></td>
+                    <td th:if="${job.isScheduled== true}">Scheduled</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; Copyright 2021. All Rights Reserved.</p> 
+        <br>
+        <p>Interview Scheduling Management by Cognizant</p>
+    </footer>
+</body>
+</html>

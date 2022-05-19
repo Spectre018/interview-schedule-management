@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobs to Apply</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-image: linear-gradient(90deg,#780206,#061161);
+        }
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, td, th{
+            border: 1px solid white;
+            text-align: center;
+            padding:15px;
+            color: #fff;
+        }
+        .col-1{
+            padding-top: 100px;
+            color: white;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+        a:hover{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+<div class="col-1">
+    <div style="width:800px; margin:0 auto;">
+    <h2>Jobs posted recently</h2>
+    <br><br>
+    </div>
+    <div style="width:800px; margin:0 auto;">
+        <table border="5px solid black" cellpadding="15">
+            <thead>
+            <tr>
+                <th>Requirement Id</th>
+                <th>Hr Id</th>
+                <th>Vacancy</th>
+                <th>Min Exp</th>
+                <th>Last Date</th>
+                <th th:id = "domain">Domain</th>
+                <th>Priority</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="job : ${joblist}" th:if="${job.isNotified == true}">
+                <td th:text="${job.requirementId}"></td>
+                <td th:text="${job.hrId}"></td>
+                <td th:text="${job.vacancy}"></td>
+                <td th:text="${job.minimumExperience}"></td>
+                <td th:id = "date" th:text="${job.closingDate}"></td>
+                <td th:text="${job.domain}"></td>
+                <td th:text="${job.priority}"></td>
+                <td><a href="/register">Register to apply</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

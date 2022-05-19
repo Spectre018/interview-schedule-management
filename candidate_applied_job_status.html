@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Applied Jobs</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-image: linear-gradient(90deg,#780206,#061161);
+        }
+        .header{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(90deg,#780206,#061161);
+            background-size: cover;
+            background-position: center;
+        }
+        .navbar{
+            width: 90%;
+            margin: auto;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content:space-evenly;
+        }
+        .navbar ul li{
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+            font-size: large;
+            position: relative;
+        }
+        .navbar a{
+            text-decoration: none;
+            color: #fff;
+        }
+        .navbar ul li::after{
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #009688;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+        .navbar ul li:hover::after{
+            width: 100%;
+        }
+        .navbar li{
+            list-style: none;
+        }
+        #logout {
+        background-color: #780206;
+        border-radius: 28px;
+        text-decoration: none;
+        color: #ffffff;
+        padding: 10px 30px;
+        display: inline-block;
+        margin: 20px;
+        font-size: 24px;
+        transition: none;
+        }
+        #logout:hover{
+            background-color: #772528;
+        }
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            width: 100%;            
+        }
+        table, td, th{
+            border: 1px solid rgb(250, 249, 249);
+            text-align: center;
+            padding:15px;
+            color: #fff;
+        }
+        footer{
+            color: #fff;
+            font-weight: 100;
+            text-align: center;
+            font-size: medium;
+            clear: both;
+            padding-top: 200px;
+            position: sticky;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="header">
+        <div class="navbar">
+            <img src="https://i.ibb.co/71T36T2/logo3.png" class="logo" width="180px">
+            <ul>
+                <li><a href="/candidate/home">Home</a></li>
+                <li><a href="/candidate/appliedJobStatus">Applied Jobs</a></li>
+                <li><a href="/candidate/addFeedback">Feedback</a></li>
+                <li><a href="/candidate/addSkills">Add Skills</a></li>
+<!--                <li><a href="">Notifications</li>-->
+            </ul>
+            <li><a href="/logout" id="logout">Logout</a></li>
+        </div>
+    </div>
+    </header>
+    <div style="width:800px; margin:0 auto;">
+        <table>
+            <thead>
+               <tr>
+                   <th>Job Id</th>
+                   <th>Mode of Interview</th>
+                   <th>Interview Date</th>
+                   <th>Status</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr th:each="job : ${joblist}" th:if="${job.candidateId} == ${currentCandidateId} and ${job.isScheduled == true}">
+                   <td th:text="${job.id}"></td>
+                   <td th:text="${job.modeOfInterview}"></td>
+                   <td th:text="${job.dateOfInterview}"></td>
+                   <td th:if="${job.isSelected == true}">Selected</td>
+                   <td th:if="${job.isSelected == false} and ${job.isMarksAwarded == true}">Rejected</td>
+                   <td th:if="${job.isSelected == false} and ${job.isMarksAwarded == false}">To be announced</td>
+               </tr>
+            </tbody>
+        </table>
+    </div>             
+    <footer>
+        <p>&copy; Copyright 2021. All Rights Reserved.</p> 
+        <p>Interview Scheduling Management by Cognizant</p>
+    </footer>
+</body>
+</html>

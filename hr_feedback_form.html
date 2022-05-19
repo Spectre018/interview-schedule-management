@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+
+    <title>Feedback</title>
+    <style>
+      *{
+        margin: 0%;
+        padding: 0%;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-image: linear-gradient(90deg,#780206,#061161);
+    }
+    .container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        color: white;
+        padding-top: 40px;
+      }
+      h1 {
+        margin-bottom: 10px;
+        margin-top: 20px;
+        color: #fff;
+        font-weight: 500;
+      }
+      /* Full-width input fields */
+     textarea {
+        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .button {
+        background-image: linear-gradient(-45deg,#780206,#061161);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        font-size: large;
+      }
+      .button:hover {
+        background-image: linear-gradient(45deg,#780206,#061161);
+        opacity: 0.8;
+      }
+
+
+   </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Feedback Form</h1>
+    <form th:action="@{/candidate/submitFeedback}" th:object="${feedback}" method="POST">
+        <label>How satisfied are you with our services</label><br>
+        <select id="recommendation" name="recommendation" th:field="*{satisfactionLevel}" required>
+            <option value="Very Satisfied">Very Satisfied</option>
+            <option value="More than Satisfied">More than Satisfied</option>
+            <option value="Satisfied">Satisfied</option>
+            <option value="Partly Satisfied">Partly Satisfied</option>
+            <option value="Not at all Satisfied">Not at all Satisfied</option>
+        </select> <br> <br>
+        <label>How likely is it that you would recommend our services to friend or colleague</label><br>
+        <select id="recommendation" name="recommendation" th:field="*{recommendationLevel}"required>
+            <option value="Highly Likely">Highly Likely</option>
+            <option value="Very Likely">Very Likely</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Unlikely">Unlikely</option>
+            <option value="Highly Unlikely">Highly Unlikely</option>
+        </select> <br> <br>
+        <label>What did you enjoy most about your experience?</label><br>
+        <textarea id="feedbackSuggestion" rows="10" cols="100" th:field="*{favAspect}"></textarea> <br> <br>
+        <label>What can we do to improve our Services?</label><br>
+        <textarea id="feedbackSuggestion" rows="10" cols="100" th:field="*{improvementAspect}"></textarea> <br>
+        <input class="button" type="submit"  value="Submit">
+    </form>
+</div>
+</body>
+</html>
